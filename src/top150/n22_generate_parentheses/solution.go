@@ -1,22 +1,21 @@
 package main
 
-var result []string
-
 func generateParenthesis(n int) []string {
-	backtracking(0, 0, n, "")
+	var result []string
+	backtracking(0, 0, n, "", &result)
 	return result
 }
 
-func backtracking(open, close, n int, t string) {
+func backtracking(open, close, n int, t string, result *[]string) {
 	if open+close == 2*n {
-		result = append(result, t)
+		*result = append(*result, t)
 	}
 
 	if open < n {
-		backtracking(open+1, close, n, t+"(")
+		backtracking(open+1, close, n, t+"(", result)
 	}
 	if close < open {
-		backtracking(open, close+1, n, t+")")
+		backtracking(open, close+1, n, t+")", result)
 	}
 }
 
